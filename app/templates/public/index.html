@@ -6,7 +6,7 @@
 <!-- Pulling from the API to Display a large image and some details of the Movies  -->
 <div class="bg">
 <!-- Calling on a random item from the API  displaying an image and the title and overview -->
-{% set data = data[2]|random %}
+{% set data = data['results']|random %}
   <img src="https://image.tmdb.org/t/p/original/{{ data['backdrop_path'] }}" alt="{{ data['title'] }}" class="lgimage">
     <h1 class="movInformation">{{ data['title'] }}</h1>
       <p class="movieDesc">{{ data['overview'] }}</p>

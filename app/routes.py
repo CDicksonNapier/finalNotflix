@@ -11,7 +11,7 @@ import json
 # Main index page - Ive kept the full links for the TMDB api here but is diferent on other pages. 
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
-    popular = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&language=en-US&page=1").json()
+    popular = requests.get(f"{creds.BASE_URL}4b96cadadd63dfa1342c3b257a7f46d0&language=en-US&page=1").json()
     top_rated_movies = requests.get(f"https://api.themoviedb.org/3/movie/top_rated?api_key={creds.API_KEY}&language=en-US&page=1").json()
     latest = requests.get(f"https://api.themoviedb.org/3/tv/top_rated?api_key={creds.API_KEY}&language=en-US").json()
     return render_template('public/index.html',title='Homepage',  data=popular, latest=latest, tr_movies=top_rated_movies)
