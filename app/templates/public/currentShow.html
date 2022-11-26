@@ -37,14 +37,7 @@
 <div class="overview">
     <h3>Overview</h3>
     <p>{{ show['overview'] }}</p>
-    {% if show['id']|int() in user_shows %}
-    <button class="btn watchlist" style="background-color: #BDE5F8; color: black;">Added &#10003;</button>
-    {% else %}
-    <!-- Adding the show by id to the users watchlist!  -->
-    <a href="{{ url_for('user.add', m_type='show', m_id=show['id']) }}">
-        <button class="btn watchlist" id="watchlist">Watchlist <i class="fa fa-plus"></i></button>
-    </a>
-    {% endif %}
+   
 </div>
 
 

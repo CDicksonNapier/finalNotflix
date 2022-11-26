@@ -1,11 +1,8 @@
 # Calling all the imports - The creds file holds my API and Secret Keys which will be hidden from the GIT Repo
 import requests
-from flask import Flask, render_template, flash, redirect, request, session, url_for, current_app
-from app import app, db
+from flask import Flask, render_template
+from app import app
 from app import creds
-from flask_login import current_user
-from app.models import WatchList
-from app.utils import watch_list
 import json
 
 API_KEY =creds.API_KEY

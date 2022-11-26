@@ -14,7 +14,7 @@
 {% if current_user.is_authenticated %}
   <div class="buttonHolder">
     <a href="{{ url_for('movies.current_movie', movie_id=data['id']) }}"><button class="moreInfoBtn">More Info</button></a>
-    <a href="{{ url_for('user.add', m_type='movie', m_id=data['id']) }}"><button class="watchlistBtn">Watchlist <i class="fa fa-plus"></i></button></a>
+    
     {% else %}
     <h2 class="information">Please <a href="{{ url_for('user.signin') }}" class="infoLink">login</a> or <a href="{{ url_for('user.register') }}" class="infoLink">sign up</a> to view details.</h2>
     {% endif %}

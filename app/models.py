@@ -1,11 +1,11 @@
 # DB models - kept the watch list basic. 
 # Calling the imports 
-from app import app, db, login_manager
+from app import db, login_manager
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
-db=SQLAlchemy()
+# from flask_login import UserMixin
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -20,17 +20,15 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(80), nullable=False )
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    watchlists = db.relationship("WatchList", overlaps='user,watchlist', backref="user", cascade="all, delete, delete-orphan", lazy=True)
+    # watchlists = db.relationship("WatchList",backref="user", cascade="all, delete, delete-orphan", lazy=True)
     def __repr__(self):
      return f'{self.username} : {self.email} : {self.date_created.strftime("%d/%m/%Y, %H:%M:%S")}'
 
-# Watch list model for the DB 
-# Kept minimal 
-class WatchList(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    movie = db.Column(db.Integer)
-    show = db.Column(db.Integer)
-    User= db.relationship('User', overlaps="user,watchlist")
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-
-
+# #  Watch list model for the DB 
+# #  Kept minimal 
+# class WatchList(db.Model):
+#   id = db.Column(db.Integer, primary_key=True)
+#   movie = db.Column(db.Integer)
+#   show = db.Column(db.Integer)
+#   User= db.relationship('User', backref="watchlist")
+#   user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)

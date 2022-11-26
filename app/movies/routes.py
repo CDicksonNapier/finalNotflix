@@ -1,7 +1,6 @@
 # Imports 
 import requests 
-from flask import Blueprint, render_template, flash, redirect, request, session, url_for
-from app import app, db
+from flask import Blueprint, render_template, flash, redirect, url_for
 from app import creds
 from flask_login import current_user
 
