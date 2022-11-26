@@ -10,8 +10,12 @@ app=Flask(__name__)
 app.config['SECRET_KEY']= creds.SECRET_KEY
 # app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://chrispg:chrispg@localhost:5432/notflixusers'
 app.config['SQLALCHEMY_DATABASE_URI']= creds.DATABASE_URL
-# app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///database/users.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+
+uri = creds.DATABASE_URL
+# or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 # Setting up the DB connection used Postgresql oringally was going to use sqlite 
 
