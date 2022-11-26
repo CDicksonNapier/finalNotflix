@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'SECRET_KEY'
 API_KEY = os.getenv('API_KEY')
 
 BASE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=" 
