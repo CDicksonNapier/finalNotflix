@@ -6,6 +6,7 @@ load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 API_KEY =  os.getenv('API_KEY')
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 BASE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=" +API_KEY
 TV_URL =" https://api.themoviedb.org/3/tv/top_rated?api_key=" +API_KEY
