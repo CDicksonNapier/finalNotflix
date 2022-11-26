@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(80), nullable=False )
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    # watchlists = db.relationship("WatchList",backref="user", cascade="all, delete, delete-orphan", lazy=True)
+    watchlists = db.relationship("WatchList",backref="user", cascade="all, delete, delete-orphan", lazy=True)
     def __repr__(self):
      return f'{self.username} : {self.email} : {self.date_created.strftime("%d/%m/%Y, %H:%M:%S")}'
 
