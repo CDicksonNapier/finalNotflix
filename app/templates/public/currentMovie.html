@@ -1,0 +1,52 @@
+<!-- Similar to the current Show. Current Movie pulls from the API and targets a specific ID -->
+{% extends "public/templates/public_template.html" %}
+
+<!-- Pulling the title from the route! -->
+{% block title %}{{title}}{% endblock %}
+<!-- Start of the main Block  -->
+{% block main %}
+<!-- Pulling from the api json data to display -->
+{% if movie['backdrop_path'] != None %}
+{% set backdrop = 'https://image.tmdb.org/t/p/original/' + movie['backdrop_path'] %}
+{% endif %}
+{% if movie['poster_path'] != None %}
+{% set img_url = 'https://image.tmdb.org/t/p/w300/' + movie['poster_path'] %}
+{% endif %}
+<!-- Start of the content  -->
+<div class="current-movie-card demo-wrap">
+  <img class="itemlgimage" src="{{ backdrop }}" alt="{{ movie['name'] }}">
+  <div class="img-div">
+    <img src="{{ img_url }}" alt="{{ movie['title']}}" class="poster-movie">
+</div>
+<div class="details">
+  <div class="demo-content">
+<!-- Added some extra content here such as genres ratings by votes  -->
+    <h2>{{ movie['title'] }}</h2>
+      <h4 style="margin-top: 5px;">{{ movie['tagline'] }}</h4>
+        <span class="fa fa-star checked" style="color: orange; margin-left: 5px;"></span>
+          <span style="font-size: 0.8rem; font-weight: bold;">{{ movie['vote_average'] }}</span>
+            <p style="margin: 10px 0;">
+              <span class="dot"></span>
+                {% for genre in movie["genres"] %}
+              <span>
+              <li>{{ genre['name'] }} ||</li>
+              </span> <span class="dot"></span>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Current Movie OverView -->
+<div class="overview">
+  <h3>Overview</h3>
+    <p>{{ movie['overview'] }}</p>
+{% if movie['id']|int() in user_movies %}
+    <button class="btn watchlist" style="background-color: #BDE5F8; color: black;">Added &#10003;</button>
+{% else %}
+<!-- Add to the Watchlist -->
+    <a href="{{ url_for('user.add', m_type='movie', m_id=movie['id']) }}">
+      <button class="btn watchlist" id="watchlist">Watchlist <i class="fa fa-plus"></i></button>
+    </a>
+{% endif %}
+</div>
+{% endblock %}

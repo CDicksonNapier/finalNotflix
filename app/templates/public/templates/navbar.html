@@ -1,0 +1,49 @@
+<!-- Navigation template -->
+<nav class="navbar navbar-expand-lg  fixed-top" id="navBar">
+  <a href="/" class="navbar-brand" id="navbar-inner">
+<!-- Home "notflix logo" acts as a home button  -->
+    <img src="{{ url_for('static', filename='images/notflix_logo.png') }}" alt="notflix_logo" height="40" class="logoImage"></a>
+    <!-- Button Toggler for smaller screens -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+<!-- Start of the Navigation  -->
+<div class="collapse navbar-collapse" id="navbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a href="{{ url_for('movies.movie')}}" class="nav-link">Movies</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{url_for('tv.shows')}}" class="nav-link">Shows</a>
+    </li>
+    <!-- If the user is signed in the Suprise me link will appear hoever it will not appear if the user is not signed in -->
+    {% if current_user.is_authenticated %}
+    <li class="nav-item dropdown" id="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Surprise</a>
+        <ul class="dropdown-menu" id="surpriseDropdown">
+          <li><a href="{{ url_for('surprise')}}" class="dropdown-item">Movies</a></li>
+          <li><a href="{{ url_for('surpriseShows')}}" class="dropdown-item">Shows</a></li>
+        </ul>
+    </li>
+  {% endif %}
+  </ul>
+</div>
+<!-- Seperate Navigation within the main Navigation for accounts  -->
+<div class="collapse navbar-collapse" id="accountNav">
+  <ul class="navbar-nav ms-auto">
+    <li class="nav-item dropdown" id="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
+      <!-- The Account Drop down depending on if the user is signed in or not the dropdown items will be diferent-->
+        <ul class="dropdown-menu">
+          {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('user.account')}}" class="dropdown-item">Account</a></li>
+          <li><a href="{{ url_for('user.logout')}}" class="dropdown-item">Log Out</a></li>
+          {% else %}
+          <li><a href="{{ url_for('user.register') }}" class="dropdown-item">Register</a></li>
+          <li><a href="{{ url_for('user.signin') }}" class="dropdown-item">Sign In</a></li>
+          {% endif %}
+        </ul>
+    </li>
+  </ul>
+</div>
+</nav>

@@ -1,0 +1,51 @@
+<!-- Current Show page - Pulls from the API and targets a specific id to display -->
+{% extends "public/templates/public_template.html" %}
+<!-- title block from the routes  -->
+{% block title %}{{title}}{% endblock %}
+<!-- start of the Main block  -->
+{% block main %}
+<!-- Pulls the information from the API.id and dispalys them  -->
+{% if (show['backdrop_path'] != None ) %}
+{% set backdrop = 'https://image.tmdb.org/t/p/w780/' + show['backdrop_path'] %}
+{% endif %}
+{% if (show['poster_path'] != None ) %}
+{% set img_url = 'https://image.tmdb.org/t/p/w300/' + show['poster_path'] %}
+{% endif %}
+<!-- More Show information, name and overview and rating etc  -->
+<div class="current-movie-card demo-wrap">
+    <img class="itemlgimage" src="{{ backdrop }}" alt="{{ show['name'] }}">
+    <div class="img-div">
+        <img src="{{ img_url }}" alt="{{ show['name'] }}" class="poster-movie">
+    </div>
+    <div class="details">
+        <!-- Added some extra content here such as genres ratings by votes  -->
+        <div class="demo-content">
+            <h2>{{ show['name'] }}</h2>
+            <h4 style="margin-top: 5px;">{{ show['tagline'] }}</h4>
+            <span class="fa fa-star checked" style="color: orange; margin-left: 5px;"></span>
+            <span style="font-size: 0.8rem; font-weight: bold;">{{ show['vote_average'] }}</span>
+            <p style="margin: 10px 0;">
+                <span class="dot"></span>
+                {% for genre in show["genres"] %}
+                <li>| {{ genre['name'] }} |</li>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
+<!-- General over view of the show  -->
+<div class="overview">
+    <h3>Overview</h3>
+    <p>{{ show['overview'] }}</p>
+    {% if show['id']|int() in user_shows %}
+    <button class="btn watchlist" style="background-color: #BDE5F8; color: black;">Added &#10003;</button>
+    {% else %}
+    <!-- Adding the show by id to the users watchlist!  -->
+    <a href="{{ url_for('user.add', m_type='show', m_id=show['id']) }}">
+        <button class="btn watchlist" id="watchlist">Watchlist <i class="fa fa-plus"></i></button>
+    </a>
+    {% endif %}
+</div>
+
+
+{% endblock %}

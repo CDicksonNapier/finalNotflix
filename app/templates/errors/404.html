@@ -1,0 +1,14 @@
+{% extends "public/templates/forms.html" %}
+
+
+{% block title %}{{title}}{% endblock %}
+
+{% block main %}
+  <div class="content-section">
+    <a href="{{url_for('homepage')}}">
+      <img src="{{ url_for('static', filename='images/notflix_logo.png') }}" alt="">
+    </a>
+    <h1>Sorry page not found (404)</h1>
+    <p>Page does not exist please try another page. </p>
+  </div>
+{% endblock %}

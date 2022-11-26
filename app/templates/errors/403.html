@@ -1,0 +1,13 @@
+{% extends "public/templates/forms.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block main %}
+  <div class="content-section">
+    <a href="{{url_for('homepage')}}">
+      <img src="{{ url_for('static', filename='images/notflix_logo.png') }}" alt="">
+    </a>
+    <h1>Sorry you don't have permission (403)</h1>
+    <p>Please check your account. </p>
+  </div>
+{% endblock %}

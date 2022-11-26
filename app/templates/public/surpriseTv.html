@@ -1,0 +1,38 @@
+<!-- this will display a completely random movie  ! -->
+{% extends "public/templates/public_template.html" %}
+
+<!-- calling the route title -->
+{% block title %}{{title}}{% endblock %}
+<!-- Starting the main block and calls the API to randomly generate a Tv show and details  -->
+{% block main %}
+{% set data = data['results']|random %}
+{% if data['backdrop_path'] != None %}
+{% set backdrop = 'https://image.tmdb.org/t/p/original/' + data['backdrop_path'] %}
+{% endif %}
+
+{% if data['poster_path'] != None %}
+{% set img_url = 'https://image.tmdb.org/t/p/w300/' + data['poster_path'] %}
+{% endif %}
+<div class="current-movie-card demo-wrap">
+    <img class="itemlgimage" src="{{ backdrop }}" alt="{{ data['name'] }}">
+    <div class="img-div">
+        <img src="{{ img_url }}" alt="" class="poster-movie">
+    </div>
+    <div class="surpriseDetails">
+        <div class="demo-content">
+            <h2>{{ data['name'] }}</h2>
+            <h4 style="margin-top: 5px;">{{ data['tagline'] }}</h4>
+        </div>
+    </div>
+</div>
+<!-- Displaying the details - Name and over view and the user can now select another random Tvshow, add to the watch list or find a movie -->
+<div class="surpriseOverview">
+    <h3>Overview</h3>
+    <p>{{ data['overview'] }}</p>
+    <button class="btn watchlist" id="watchlist"> <a
+            href="{{ url_for('user.add', m_type='movie', m_id=data['id']) }}">Watchlist</a><i
+            class="fa fa-plus"></i></button>
+    <button class="btn btn-success" id="newBtn"><a href="{{ url_for('surprise') }}">Want a movie?</a></button>
+    <button class="btn btn-primary" id="newBtn"><a href="{{ url_for('surprise') }}">Something else?</a></button>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+<!-- Home Page - Uses the public template! -->
+{% extends "public/templates/public_template.html" %}
+<!-- Title from the Routes!  -->
+{% block title %}{{title}}{% endblock %}
+{% block main %}
+<!-- Pulling from the API to Display a large image and some details of the Movies  -->
+<div class="bg">
+<!-- Calling on a random item from the API  displaying an image and the title and overview -->
+{% set data = data['results']|random %}
+  <img src="https://image.tmdb.org/t/p/original/{{ data['backdrop_path'] }}" alt="{{ data['title'] }}" class="lgimage">
+    <h1 class="movInformation">{{ data['title'] }}</h1>
+      <p class="movieDesc">{{ data['overview'] }}</p>
+      <!-- If the user is sifned in then it will display the view more and watch list buttons otherwise display a prompt to get the user to sign in or register  -->
+{% if current_user.is_authenticated %}
+  <div class="buttonHolder">
+    <a href="{{ url_for('movies.current_movie', movie_id=data['id']) }}"><button class="moreInfoBtn">More Info</button></a>
+    <a href="{{ url_for('user.add', m_type='movie', m_id=data['id']) }}"><button class="watchlistBtn">Watchlist <i class="fa fa-plus"></i></button></a>
+    {% else %}
+    <h2 class="information">Please <a href="{{ url_for('user.signin') }}" class="infoLink">login</a> or <a href="{{ url_for('user.register') }}" class="infoLink">sign up</a> to view details.</h2>
+    {% endif %}
+  </div>
+</div>
+<!-- Start of the carousels going to have a few randoms here seperated for movies and tv -->
+<div class="row">
+<!-- Tv Listings pulling from the  most popular right now  -->
+  <div class="header">
+    <h3 class="titles">What's on TV?</h3>
+    <div class="progress-bar"></div>
+</div>
+<div class="carousel-container">
+  <button class="handle handle-left">
+   <div class="text">&#8249;</div>
+  </button>
+<div class="slider">
+{% for latest in latest['results'] %}
+<div class="imageCard">
+  <a href="{{ url_for('tv.current_show', tv_id=latest['id']) }}">
+  <img src="https://image.tmdb.org/t/p/original/{{ latest['backdrop_path'] }}"
+            alt="{{ latest['title'] }}" /></a>
+</div>
+{% endfor %}
+</div>
+<button class="handle handle-right">
+  <div class="text">&#8250;</div>
+</button>
+</div>
+<!-- Upcoming Movies  -->
+<div class="header">
+  <h3 class="titles">Coming Soon!</h3>
+    <div class="progress-bar"></div>
+</div>
+<div class="carousel-container">
+  <button class="handle handle-left">
+    <div class="text">&#8249;</div>
+  </button>
+<div class="slider">
+{% for top in tr_movies['results'] %}
+  <div class="imageCard">
+    <a href="{{ url_for('movies.current_movie', movie_id=top['id']) }}">
+    <img src="https://image.tmdb.org/t/p/original/{{ top['backdrop_path'] }}" alt="{{ top['title'] }}" /></a>
+  </div>
+{% endfor %}
+</div>
+<button class="handle handle-right">
+  <div class="text">&#8250;</div>
+</button>
+</div>
+</div>
+<br>
+{% endblock %}

@@ -1,0 +1,130 @@
+<!-- Start of the movies page - Similar to the TV shows page. Pulls from the API and Display images within the carousels -->
+{% extends "public/templates/public_template.html" %}
+<!-- Pulls from the route to display the title  -->
+{% block title %}{{title}}{% endblock %}
+<!-- start of the main block  -->
+{% block main %}
+<!-- Large BG image will dipslay a random movie and some details about it! -->
+<div class="bg">
+  {% set popular = popular['results']|random %}
+  <img
+    src="https://image.tmdb.org/t/p/original/{{ popular['backdrop_path'] }}"
+    alt="{{ popular['title'] }}"
+    class="lgimage"
+  />
+  <h1 class="movInformation">{{ popular['title']}}</h1>
+  <p class="movieDesc">{{ popular['overview'] }}</p>
+  <!-- If the Current user is logged in will display the buttons other wise will prompt them to sign in or sign up -->
+  {% if current_user.is_authenticated %}
+  <div class="buttonHolder">
+    <a href="{{ url_for('movies.current_movie', movie_id=popular['id']) }}"
+      ><button class="moreInfoBtn">More Info</button></a>
+    <a href="{{ url_for('user.add', m_type='movie', m_id=popular['id']) }}"
+      ><button class="watchlistBtn">Watchlist <i class="fa fa-plus"></i></button></a>
+    {% else %}
+    <h2 class="information">
+      Please
+      <a href="{{ url_for('user.signin') }}" class="infoLink">login</a> or <a href="{{ url_for('user.register') }}" class="infoLink">sign up</a> to view details.</h2>
+    {% endif %}
+  </div>
+  <br />
+  <!-- Start of the movies Carousel spliting up into genres starting with Comedies!  -->
+  <div class="row">
+    <div class="header">
+      <h3 class="titles">Top Laughs.</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="carousel-container">
+      <button class="handle handle-left">
+        <div class="text">&#8249;</div>
+      </button>
+      <div class="slider">
+        {% for comedy in comedy['results'] %}
+        <div class="imageCard">
+          <a
+            href="{{ url_for('movies.current_movie', movie_id=comedy['id']) }}">
+            <img
+              src="https://image.tmdb.org/t/p/original/{{ comedy.backdrop_path }}" alt="{{ comedy.title }}"/>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="handle handle-right">
+        <div class="text">&#8250;</div>
+      </button>
+    </div>
+    <!-- Action and Adventure films -->
+    <div class="header">
+      <h3 class="titles">Action & Adventure.</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="carousel-container">
+      <button class="handle handle-left">
+        <div class="text">&#8249;</div>
+      </button>
+      <div class="slider">
+        {% for ada in ada['results'] %}
+        <div class="imageCard">
+          <a href="{{ url_for('movies.current_movie', movie_id=ada['id']) }}">
+            <img
+              src="https://image.tmdb.org/t/p/original/{{ ada.backdrop_path }}" alt="{{ ada.title }}" />
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="handle handle-right">
+        <div class="text">&#8250;</div>
+      </button>
+    </div>
+    <!-- Horror Films -->
+    <div class="header">
+      <h3 class="titles">Spooky Season.</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="carousel-container">
+      <button class="handle handle-left">
+        <div class="text">&#8249;</div>
+      </button>
+      <div class="slider">
+        {% for horror in horror['results'] %}
+        <div class="imageCard">
+          <a
+            href="{{ url_for('movies.current_movie', movie_id=horror['id']) }}">
+            <img
+              src="https://image.tmdb.org/t/p/original/{{ horror.backdrop_path }}" alt="{{horror.title}}"
+            />
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="handle handle-right">
+        <div class="text">&#8250;</div>
+      </button>
+    </div>
+    <!-- Scifi Films -->
+    <div class="header">
+      <h3 class="titles">Galactic Treats.</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="carousel-container">
+      <button class="handle handle-left">
+        <div class="text">&#8249;</div>
+      </button>
+      <div class="slider">
+        {% for scifi in scifi['results'] %}
+        <div class="imageCard">
+          <a href="{{ url_for('movies.current_movie', movie_id=scifi['id']) }}">
+            <img
+              src="https://image.tmdb.org/t/p/original/{{ scifi.backdrop_path }}" alt="{{ scifi.title }}" />
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="handle handle-right">
+        <div class="text">&#8250;</div>
+      </button>
+    </div>
+
+    {% endblock %}
+  </div>
+</div>

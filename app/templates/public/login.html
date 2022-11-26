@@ -1,0 +1,54 @@
+<!-- Using the forms html -->
+{% extends "public/templates/forms.html" %} 
+<!-- Title Block  -->
+{% block title %} {{title}} {%endblock %}
+
+{% block main %}
+
+<!-- Flash message block  -->
+<div class="container w-25">
+  {% with messages=get_flashed_messages(with_categories=true) %} {% if messages
+  %} {% for category, message in messages %}
+  <div class="alert alert-{{ category }}" id="alerts">{{ message }}</div>
+  {% endfor %} {% endif %} {% endwith %}
+</div>
+<!-- Start of the Form Using WTForms  -->
+<div class="container-form-signin">
+  <a href="/">
+    <div class="regLogo"></div>
+  </a>
+<form action="" method="POST">
+  {{ form.hidden_tag() }}
+    <fieldset>
+    <legend>Login</legend>
+    <div class="form-group">
+    {{ form.username.label(class="form-control-label")}}
+      {% if form.username.errors %}
+        {{ form.username(class="form-control form-control-md is-invalid", id="frm-inpts")}}
+        {% for error in form.username.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      {% else %} 
+        {{ form.username(class="form-control form-control-md", id="frm-inpts")}} 
+      {% endif %}
+        <br />
+      {{ form.password.label(class="form-control-label")}}
+        {% if form.password.errors %}
+          {{ form.password(class="form-control form-control-md is-invalid", id="frm-inpts")}}
+        {% for error in form.password.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+        {% else %}
+        {{ form.password(class="form-control form-control-md", id="frm-inpts")}}
+        {% endif %}
+        <br />
+        {{ form.submit(class="form-control form-control-md", id="submitBtn")}}
+      </div>
+    </fieldset>
+    <br />
+    <!-- If the user Needs an account - direct them to the sign up registration form  -->
+    <p> Need an account? <a href="{{ url_for('user.register')}}">Signup here!</a></p>
+  </form>
+</div>
+
+{% endblock %}

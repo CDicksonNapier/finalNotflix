@@ -1,0 +1,571 @@
+/* Some Root Information  */
+:root {
+  --bg-color: black;
+  --red-color: #e50914;
+  --white-color: #ffffff;
+  --light-grey: #e6e6e6;
+  --med-light-grey: #b3b3b3;
+  --med-dark-grey: #696969;
+  --dark-grey: #333333;
+  --duration: 250ms;
+  --img-gap: 0.25rem;
+  --handle-size: 3rem;
+}
+
+/*Font families and alternates*/
+@font-face {
+  font-family: "netflixSansLight";
+  src: url("../fonts/NetflixSans-Light.otf");
+}
+@font-face {
+  font-family: "netflixSansBold";
+  src: url("../fonts/NetflixSans-Bold.otf");
+}
+/* Reseting the margins and padding */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+/* basic body info */
+body {
+  height: 100vh;
+  font-family: "netflixSansBold";
+  color: var(--white-color);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Logo image Information  */
+.logoImage {
+  height: 2.6rem;
+  margin-left: 1rem;
+}
+/* Navigation Information  */
+#navBar {
+  opacity: 0.8;
+}
+
+.nav-link {
+  font-size: 1.3rem;
+  font-family: "netflixSansLight";
+  color: var(--white-color);
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.nav-link:hover {
+  color: var(--white-color);
+}
+/* Handled with a seprate drop down */
+#accountNav {
+  margin-right: 2rem;
+  margin-bottom: 1%;
+  background-color: transparent;
+}
+#accountNav .dropdown-menu {
+  background-color: var(--white-color);
+  border: none;
+  outline: none;
+}
+#accountNav .dropdown-menu a {
+  background-color: transparent;
+  color: black;
+}
+
+/* Had to create a drop down for the Surprise me links  */
+#surpriseDropdown {
+  background-color: var(--white-color);
+  opacity: 0.75;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: "netflixSansBold";
+  color: black;
+  text-align: center;
+}
+
+#surpriseDropdown a {
+  color: black;
+}
+#surpriseDropdown a:hover {
+  background-color: transparent;
+}
+
+/* Image container for the api to feed some info  */
+
+.bg {
+  height: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #000;
+}
+/* For the hidden buttons on screen */
+.buttonHolder {
+  position: absolute;
+  height: 60px;
+  width: 500px;
+  top: 58%;
+  display: flex;
+  justify-content: center;
+}
+.bg .watchlistBtn {
+  height: 50px;
+  width: 180px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.24);
+  color: var(--white-color);
+  border: 2px solid var(--white-color);
+  transition: all 0.5s ease-out;
+}
+.bg .moreInfoBtn {
+  height: 50px;
+  width: 180px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.24);
+  color: var(--white-color);
+  border: 2px solid var(--white-color);
+  transition: opacity 0.5s ease-in;
+}
+.watchlistBtn a:hover {
+  color: #000;
+}
+
+.bg .moreInfoBtn:hover,
+.watchlistBtn:hover {
+  background-color: rgba(256, 256, 256, 1);
+  border: 2px solid black;
+  color: black;
+  transition: opacity 1s;
+}
+/* Information Text that displays instead of the buttons if the user is not logged in  */
+.information {
+  position: absolute;
+  top: 55%;
+  left: 2.3%;
+}
+/* sign up, login text within the information  */
+.infoLink {
+  text-decoration: underline;
+  color: var(--white-color);
+}
+/* Registration body */
+.rBody {
+  height: 100vh;
+  overflow-y: hidden;
+}
+.lgimage {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  opacity: 0.55;
+}
+.movInformation {
+  position: absolute;
+  top: 35%;
+  left: 2%;
+  font-family: "netflixSansBold";
+  font-size: 4rem;
+}
+.movieDesc {
+  position: absolute;
+  top: 45%;
+  left: 2.5%;
+  font-family: "netflixSansLight";
+  width: 70%;
+  font-size: 1rem;
+}
+
+/* Carousel Information  */
+
+.carousel-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+.slider {
+  --items-per-screen: 6;
+  --slider-index: 0;
+  display: flex;
+  flex-grow: 1;
+  transform: translateX(calc(var(--slider-index) * -100vw));
+  transition: transform 250ms ease-in-out;
+  width: 92%;
+}
+
+.slider > .imageCard a img {
+  height: 165px;
+  width: 350px;
+  flex: 0 0 calc(100% / var(--items-per-screen));
+  padding: 0.25rem;
+  border-radius: 1rem;
+  opacity: 0.5;
+  transition: transform 0.5s ease-in-out;
+}
+.slider > .imageCard img:hover {
+  opacity: 1;
+}
+/* Slider Buttons  */
+.handle {
+  border: none;
+  border-radius: 1rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 100;
+  margin: 0.25rem 0;
+  width: 5rem;
+  cursor: pointer;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  line-height: 0;
+  transition: background-color 150ms ease-in-out;
+}
+.handle:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.handle-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.handle-right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.handle:hover,
+.handle:focus {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.text {
+  transition: transform 150ms ease-in-out;
+}
+.handle:hover .text,
+.handle:focus .text {
+  transform: scale(1.2);
+}
+/*  */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem calc(var(--img-gap) * 2 + var(--handle-size));
+}
+/* Carousel Names */
+.titles {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0rem;
+  color: var(--white-color);
+  font-family: "netflixSansLight";
+}
+/* Progress bar shows how far along the  */
+.progress-bar {
+  display: flex;
+  gap: 0.3rem;
+  flex-direction: row;
+}
+.progress-item {
+  flex: 0 0 2rem;
+  min-width: 2rem;
+  height: 0.35rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.progress-item.active {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Form Information for register / sign up  */
+
+.container-form {
+  position: absolute;
+  height: 75%;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  font-family: "netflixSansLight";
+}
+.container-form-signin {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  font-family: "netflixSansLight";
+}
+.container-form-signin form {
+  margin-top: 15%;
+  width: 75%;
+}
+.container-form form {
+  width: 75%;
+}
+.container-form label {
+  font-size: 1rem;
+}
+legend {
+  font-size: 2.3rem;
+}
+/* Top of the screen Logo */
+.logo {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+/* the logo for the form  */
+.regLogo {
+  position: absolute;
+  top: 2%;
+  height: 70px;
+  width: 100px;
+  left: 0;
+  width: 100%;
+  background-image: url("../images/notflix_logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+/* Some styling for the Flash alerts*/
+#alerts {
+  position: absolute;
+  margin-top: 2rem;
+  width: 40%;
+  text-align: center;
+  font-size: 1.5rem;
+  left: 30%;
+}
+
+#submitBtn {
+  width: 50%;
+  background-color: var(--red-color);
+  margin-left: 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--white-color);
+  outline: none;
+  border: none;
+}
+/* Form input Styling */
+#frm-inpts {
+  border: none;
+  outline: none;
+  opacity: 0.45;
+  transition: 0.2s ease-in;
+}
+#frm-inpts:focus {
+  opacity: 0.8;
+}
+/* Information for the tv/movie pages!  */
+.itemlgimage {
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+  background-size: contain;
+}
+/* large image  */
+.current-movie-card {
+  height: 60%;
+}
+/* the actual movie poster */
+.poster-movie {
+  position: absolute;
+  top: 35%;
+  left: 4%;
+  box-shadow: 2px 2px 20px black;
+}
+/* Details block */
+.details {
+  width: 100%;
+  position: absolute;
+  left: 23%;
+  top: 35%;
+}
+/* slight diference in the Surprise tv or movies  */
+.surpriseDetails {
+  width: 100%;
+  position: absolute;
+  left: 23%;
+  top: 50%;
+}
+/* list items for the Genres  */
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+/* text  */
+.details h2 {
+  color: var(--white-color);
+  font-size: 3.8rem;
+  width: 100%;
+}
+.surpriseDetails h2 {
+  font-size: 3.8rem;
+}
+.details h4 {
+  font-size: 2rem;
+  font-family: "netflixsanslight";
+}
+.overview {
+  position: relative;
+  height: 20%;
+  width: 50%;
+  left: 23%;
+  top: 0;
+}
+/* Text for the overview Slightly diferent */
+.surpriseOverview {
+  position: relative;
+  height: 10%;
+  width: 50%;
+  left: 23%;
+  top: 0;
+}
+.overview p {
+  color: var(--white-color);
+  font-size: 1.2rem;
+}
+/* Button links for the page */
+button a {
+  text-decoration: none;
+  color: var(--white-color);
+}
+button a:hover {
+  text-decoration: none;
+  color: var(--white-color);
+}
+#watchlist {
+  background-color: var(--white-color);
+}
+#watchlist a {
+  color: black;
+}
+/* Account Page Content */
+.account-block {
+  position: relative;
+  top: 10%;
+  display: block;
+  width: 90%;
+  left: 5%;
+}
+/* The card for the Images on the account page to showcase the movies or tv shows  */
+.card {
+  margin: 10px;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid transparent;
+}
+.row {
+  padding: 20px;
+}
+main {
+  position: relative;
+}
+/* Footer Information */
+.footer-dark {
+  position: relative;
+  width: 100%;
+  color: var(--white-color);
+  height: 22%;
+  top: 17%;
+}
+.footer-dark h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.footer-dark ul {
+  padding: 0;
+  list-style: none;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.footerImage {
+  height: 100px;
+  width: 100px;
+}
+.footer-dark p {
+  font-family: "netflixsanslight";
+}
+.footer-dark ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.6;
+}
+.footer-dark ul a:hover {
+  opacity: 0.8;
+}
+
+.footer-dark .copyright {
+  text-align: center;
+}
+
+.footer-dark .item.text {
+  margin-bottom: 36px;
+}
+
+.footer-dark .item.text p {
+  opacity: 0.6;
+  margin-bottom: 0;
+}
+.footer-dark .item.social > a {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+  margin: 0 8px;
+  color: #fff;
+  opacity: 0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity: 0.9;
+}
+.footer-dark .copyright {
+  text-align: center;
+  padding-top: 24px;
+  opacity: 0.3;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+
+/* Last minute Error page content */
+
+.content-section{
+ position: absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+
+}
+.content-section img{
+  margin-left:15%;
+  margin-bottom: 5%;
+}
