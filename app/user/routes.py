@@ -2,7 +2,7 @@
 from flask import Blueprint, Flask, render_template, flash, redirect, request, session, url_for
 from app.forms import RegistrationForm,LoginForm
 from app import  db, bcrypt
-from app.models import User, WatchList
+from app.models import User
 from flask_login import login_user, logout_user, current_user
 # from app.utils import watch_list
 import requests
@@ -62,23 +62,11 @@ def logout():
     logout_user()
     return redirect(url_for('user.signin'))
 
-# #Accounts will dispaly lists from the Watchlist models this is filtered per user 
-# @user.route('/account', methods=['GET', 'POST'])
-# def account():
-#     list = WatchList.query.filter_by(user_id=current_user.id).all()
-#     shows = []
-#     movies = []
-#     for item in list:
-#         if(item.show):
-#             show_url= f"https://api.themoviedb.org/3/tv/{item.show}?api_key={creds.API_KEY}&language=en-GB"
-#             show = requests.get(show_url).json()
-#             shows.append(show)
-#         elif(item.movie):
-#             movie_url = f"https://api.themoviedb.org/3/movie/{item.movie}?api_key={creds.API_KEY}&language=en-GB"
-#             movie = requests.get(movie_url).json()
-#             movies.append(movie)
-  
-#     return render_template('public/account.html', title='Account', shows=shows, movies=movies)
+ #Accounts will dispaly lists from the Watchlist models this is filtered per user 
+@user.route('/account', methods=['GET', 'POST'])
+def account():
+ 
+    return render_template('public/account.html', title='Account')
 
 # #adding a movie or show to the Watch list!
 # @user.route('/add/<string:m_type>/<int:m_id>')
