@@ -3,6 +3,8 @@ import requests
 from flask import Flask, render_template
 from app import app
 from app import creds
+from app.models import WatchList
+from app.utils import watch_list
 import json
 
 API_KEY =creds.API_KEY

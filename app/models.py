@@ -4,9 +4,6 @@ from app import db, login_manager
 from datetime import datetime
 from flask_login import UserMixin
 
-# from flask_login import UserMixin
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -26,9 +23,9 @@ class User(db.Model, UserMixin):
 
 # #  Watch list model for the DB 
 # #  Kept minimal 
-# class WatchList(db.Model):
-#   id = db.Column(db.Integer, primary_key=True)
-#   movie = db.Column(db.Integer)
-#   show = db.Column(db.Integer)
-#   User= db.relationship('User', backref="watchlist")
-#   user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+class WatchList(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  movie = db.Column(db.Integer)
+  show = db.Column(db.Integer)
+  User= db.relationship('User', backref="watchlist")
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
