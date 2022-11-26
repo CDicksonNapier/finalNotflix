@@ -10,11 +10,11 @@ movies = Blueprint('movies', __name__)
 # Movies route - pulling the Json data from the API 
 @movies.route('/movies')
 def movie():
-    popular = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&language=en-US&page=1").json()
-    comedy = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&with_genres=35&language=en-GB").json()
-    horror = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&with_genres=27,53&language=en-G").json()
-    ada = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&with_genres=28,12&language=en-G").json()
-    scifi = requests.get(f"{creds.BASE_URL}{creds.API_KEY}&with_genres=878,10752&language=en-G").json()
+    popular = requests.get(f"{creds.BASE_URL}&language=en-US&page=1").json()
+    comedy = requests.get(f"{creds.BASE_URL}&with_genres=35&language=en-GB").json()
+    horror = requests.get(f"{creds.BASE_URL}&with_genres=27,53&language=en-G").json()
+    ada = requests.get(f"{creds.BASE_URL}&with_genres=28,12&language=en-G").json()
+    scifi = requests.get(f"{creds.BASE_URL}&with_genres=878,10752&language=en-G").json()
     return render_template('public/movies.html', popular =popular, comedy=comedy, horror=horror, ada=ada, scifi=scifi )
 # pulling a movie by ID from the API if the user is not signed in then will be redirected to the login page
 @movies.route("/movie/<int:movie_id>")
