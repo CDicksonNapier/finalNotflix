@@ -11,3 +11,4 @@ BASE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=" +API_KEY
 TV_URL =" https://api.themoviedb.org/3/tv/top_rated?api_key=" +API_KEY
 
 
+DATABASE_URL = 'DATABASE_URL'
