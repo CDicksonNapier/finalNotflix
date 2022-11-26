@@ -10,14 +10,14 @@ tv = Blueprint("tv", __name__)
 # Creating the tv routes- calls on the creds file for the tv show links !
 @tv.route('/tv')
 def shows():
-    latest = requests.get(f"{creds.TV_URL}{creds.API_KEY}&language=en-GB").json()
+    latest = requests.get(f"{creds.TV_URL}&language=en-GB").json()
     comedy = requests.get(
-        f"{creds.TV_URL}{creds.API_KEY}&with_genres=35&language=en-GB").json()
+        f"{creds.TV_URL}&with_genres=35&language=en-GB").json()
     adventure = requests.get(
-        f"{creds.TV_URL}{creds.API_KEY}&with_genres=10759&language=en-GB").json()
-    drama = requests.get(f"{creds.TV_URL}{creds.API_KEY}&with_genres=18&language=en-G").json()
+        f"{creds.TV_URL}&with_genres=10759&language=en-GB").json()
+    drama = requests.get(f"{creds.TV_URL}&with_genres=18&language=en-G").json()
     scifi = requests.get(
-        f"{creds.TV_URL}{creds.API_KEY}&with_genres=10765&language=en-GB").json()
+        f"{creds.TV_URL}&with_genres=10765&language=en-GB").json()
 
     return render_template('public/tvShows.html', latest=latest, comedy=comedy, adventure=adventure, drama=drama, scifi=scifi)
 
