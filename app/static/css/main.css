@@ -184,7 +184,7 @@ body {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  width: 100%;
+  width: 99%;
 }
 .slider {
   --items-per-screen: 5;
@@ -193,7 +193,7 @@ body {
   flex-grow: 1;
   transform: translateX(calc(var(--slider-index) * -100vw));
   transition: transform 250ms ease-in-out;
-  width: 95%;
+  width: 99%;
 }
 
 .slider > .imageCard a img {
