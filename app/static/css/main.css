@@ -191,7 +191,7 @@ body {
   --slider-index: 0;
   display: flex;
   flex-grow: 1;
-  transform: translateX(calc(var(--slider-index) * -100vw));
+  transform: translateX(calc(var(--slider-index) * -95vw));
   transition: transform 250ms ease-in-out;
   width: 97%;
 }
