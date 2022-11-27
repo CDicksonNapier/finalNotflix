@@ -193,12 +193,12 @@ body {
   flex-grow: 1;
   transform: translateX(calc(var(--slider-index) * -100vw));
   transition: transform 250ms ease-in-out;
-  width: 97%;
+  width: 95%;
 }
 
 .slider > .imageCard a img {
   height: 165px;
-  width: 300px;
+  width: 350px;
   flex: 0 0 calc(100% / var(--items-per-screen));
   padding: 0.25rem;
   border-radius: 1rem;
