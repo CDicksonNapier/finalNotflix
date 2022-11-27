@@ -193,7 +193,7 @@ body {
   flex-grow: 1;
   transform: translateX(calc(var(--slider-index) * -95vw));
   transition: transform 250ms ease-in-out;
-  width: 97%;
+  width: 100%;
 }
 
 .slider > .imageCard a img {
