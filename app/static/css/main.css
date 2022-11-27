@@ -198,7 +198,7 @@ body {
 
 .slider > .imageCard a img {
   height: 165px;
-  width: 350px;
+  width: 400px;
   flex: 0 0 calc(100% / var(--items-per-screen));
   padding: 0.25rem;
   border-radius: 1rem;
