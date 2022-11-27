@@ -187,13 +187,13 @@ body {
   width: 100%;
 }
 .slider {
-  --items-per-screen: 4;
+  --items-per-screen: 5;
   --slider-index: 0;
   display: flex;
   flex-grow: 1;
-  transform: translateX(calc(var(--slider-index) * -95vw));
+  transform: translateX(calc(var(--slider-index) * -100vw));
   transition: transform 250ms ease-in-out;
-  width: 100%;
+  width: 95%;
 }
 
 .slider > .imageCard a img {
