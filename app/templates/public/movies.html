@@ -19,8 +19,7 @@
   <div class="buttonHolder">
     <a href="{{ url_for('movies.current_movie', movie_id=popular['id']) }}"
       ><button class="moreInfoBtn">More Info</button></a>
-    <a href="{{ url_for('user.add', m_type='movie', m_id=popular['id']) }}"
-      ><button class="watchlistBtn">Watchlist <i class="fa fa-plus"></i></button></a>
+  
     {% else %}
     <h2 class="information">
       Please
