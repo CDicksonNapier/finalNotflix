@@ -2,7 +2,7 @@
 # Calling the imports 
 from app import db, login_manager
 from datetime import datetime
-
+from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -10,7 +10,7 @@ def load_user(user_id):
 
 # User Information - with watchlists as its relationship each user will have diferent tastes etc 
 # Ive added an image to this but havent incorperated it into the user accounts it is something id like to add in the future have the user be able to add a profile pic
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), nullable=False)
