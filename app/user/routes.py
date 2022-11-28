@@ -3,9 +3,9 @@ from flask import Blueprint, Flask, render_template, flash, redirect, request, s
 from app.forms import RegistrationForm,LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from app import  creds, db, bcrypt
-from app.models import User, WatchList
+from app.models import User
 from flask_login import login_user, logout_user, current_user
-from app.utils import watch_list
+# from app.utils import watch_list
 import requests
 
 # Initiating the Blueprint
@@ -66,53 +66,53 @@ def logout():
 #Accounts will dispaly lists from the Watchlist models this is filtered per user 
 @user.route('/account', methods=['GET', 'POST'])
 def account():
-    list = WatchList.query.filter_by(user_id=current_user.id).all()
-    shows = []
-    movies = []
-    for item in list:
-        if(item.show):
-            show_url= f"https://api.themoviedb.org/3/tv/{item.show}?api_key={creds.API_KEY}&language=en-GB"
-            show = requests.get(show_url).json()
-            shows.append(show)
-        elif(item.movie):
-            movie_url = f"https://api.themoviedb.org/3/movie/{item.movie}?api_key={creds.API_KEY}&language=en-GB"
-            movie = requests.get(movie_url).json()
-            movies.append(movie)
+    # list = WatchList.query.filter_by(user_id=current_user.id).all()
+    # shows = []
+    # movies = []
+    # for item in list:
+    #     if(item.show):
+    #         show_url= f"https://api.themoviedb.org/3/tv/{item.show}?api_key={creds.API_KEY}&language=en-GB"
+    #         show = requests.get(show_url).json()
+    #         shows.append(show)
+    #     elif(item.movie):
+    #         movie_url = f"https://api.themoviedb.org/3/movie/{item.movie}?api_key={creds.API_KEY}&language=en-GB"
+    #         movie = requests.get(movie_url).json()
+    #         movies.append(movie)
   
-    return render_template('public/account.html', title='Account', shows=shows, movies=movies)
+    return render_template('public/account.html', title='Account') #shows=shows, movies=movies)
 
-#adding a movie or show to the Watch list!
-@user.route('/add/<string:m_type>/<int:m_id>')
-def add(m_type, m_id):
-    # starting with empty lists 
-    user_movies, user_shows =[],[]
-    if current_user.is_authenticated:
-        user_movies, user_shows = watch_list(current_user.id)
-        user = User.query.filter_by(id=current_user.id).first()
-        # if the movie is not in the list this adds it and updates the DB
-        if m_type == 'movie':
-            if m_id not in user_movies:
-                mv = WatchList(movie = m_id, user_id = user.id)
-                db.session.add(mv)
-                db.session.commit()
-        else:
-            # does the same as movies but for the Shows 
-            if m_id not in user_shows:
-                mv = WatchList(show=m_id, user_id=user.id)
-                db.session.add(mv)
-                db.session.commit()
-    # Refreshes the page
-    return redirect(request.referrer)
+# #adding a movie or show to the Watch list!
+# @user.route('/add/<string:m_type>/<int:m_id>')
+# def add(m_type, m_id):
+#     # starting with empty lists 
+#     user_movies, user_shows =[],[]
+#     if current_user.is_authenticated:
+#         user_movies, user_shows = watch_list(current_user.id)
+#         user = User.query.filter_by(id=current_user.id).first()
+#         # if the movie is not in the list this adds it and updates the DB
+#         if m_type == 'movie':
+#             if m_id not in user_movies:
+#                 mv = WatchList(movie = m_id, user_id = user.id)
+#                 db.session.add(mv)
+#                 db.session.commit()
+#         else:
+#             # does the same as movies but for the Shows 
+#             if m_id not in user_shows:
+#                 mv = WatchList(show=m_id, user_id=user.id)
+#                 db.session.add(mv)
+#                 db.session.commit()
+#     # Refreshes the page
+#     return redirect(request.referrer)
 
-#Delete Item from Watch List - Clears all the user movies/shows 
-@user.route('/del/<int:id>', methods=['GET', 'POST'])
-def delItem(id): 
-    if current_user.is_authenticated:
-        user_movies, user_shows = watch_list(current_user.id)
-        rmv = WatchList.query.delete(id==watch_list(current_user.id))
-        # db.session.delete()
-        db.session.commit() 
-    return redirect(url_for('user.account'))
+# #Delete Item from Watch List - Clears all the user movies/shows 
+# @user.route('/del/<int:id>', methods=['GET', 'POST'])
+# def delItem(id): 
+#     if current_user.is_authenticated:
+#         user_movies, user_shows = watch_list(current_user.id)
+#         rmv = WatchList.query.delete(id==watch_list(current_user.id))
+#         # db.session.delete()
+#         db.session.commit() 
+    # return redirect(url_for('user.account'))
   
 
 
