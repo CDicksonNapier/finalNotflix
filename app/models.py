@@ -27,5 +27,5 @@ class WatchList(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   movie = db.Column(db.Integer)
   show = db.Column(db.Integer)
-  User= db.relationship('User',overlaps="user,watchlists", backref="watchlist")
+  User= db.relationship('User', backref="watchlist")
   user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
