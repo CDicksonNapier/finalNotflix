@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app import  creds, db, bcrypt
 from app.models import User
 from flask_login import login_user, logout_user, current_user
-# from app.utils import watch_list
+
 import requests
 
 # Initiating the Blueprint
