@@ -97,25 +97,25 @@ def account():
 
 @user.route('/add/<string:m_type>/<int:m_id>')
 def add(m_type, m_id):
-    # starting with empty lists
-    user_movies, user_shows = [], []
-    if current_user.is_authenticated:
-        user_movies, user_shows = watch_list(current_user.id)
-        user = User.query.filter_by(id=current_user.id).first()
-        # if the movie is not in the list this adds it and updates the DB
-        if m_type == 'movie':
-            if m_id not in user_movies:
-                mv = WatchList(movie=m_id, user_id=user.id)
-                db.session.add(mv)
-                db.session.commit()
-        else:
-            # does the same as movies but for the Shows
-            if m_id not in user_shows:
-                mv = WatchList(show=m_id, user_id=user.id)
-                db.session.add(mv)
-                db.session.commit()
+  # starting with empty lists
+  user_movies, user_shows = [], []
+  if current_user.is_authenticated:
+      user_movies, user_shows = watch_list(current_user.id)
+      user = User.query.filter_by(id=current_user.id).first()
+      # if the movie is not in the list this adds it and updates the DB
+      if m_type == 'movie':
+          if m_id not in user_movies:
+              mv = WatchList(movie=m_id, user_id=user.id)
+              db.session.add(mv)
+              db.session.commit()
+      else:
+          # does the same as movies but for the Shows
+          if m_id not in user_shows:
+              mv = WatchList(show=m_id, user_id=user.id)
+              db.session.add(mv)
+              db.session.commit()
     # Refreshes the page
-    return redirect(request.referrer)
+  return redirect(request.referrer)
 
 # Delete Item from Watch List - Clears all the user movies/shows
 
