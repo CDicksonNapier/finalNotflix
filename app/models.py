@@ -21,3 +21,11 @@ class User(db.Model):
     def __repr__(self):
      return f'{self.username} : {self.email} : {self.date_created.strftime("%d/%m/%Y, %H:%M:%S")}'
 
+#  Watch list model for the DB 
+# #  Kept minimal 
+class WatchList(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  movie = db.Column(db.Integer)
+  show = db.Column(db.Integer)
+  User= db.relationship('User', backref="watchlist")
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
