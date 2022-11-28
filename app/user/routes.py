@@ -1,5 +1,5 @@
 # IMPORTS AND FROMS
-from flask import Blueprint, Flask, render_template, flash, redirect, request, session, url_for
+from flask import Blueprint, Flask, render_template, flash, redirect, request, url_for
 from app.forms import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from app import creds, db, bcrypt
@@ -90,32 +90,32 @@ def account():
             movie = requests.get(movie_url).json()
             movies.append(movie)
 
-    return render_template('public/account.html', title='Account')
+    return render_template('public/account.html', title='Account',shows=shows, movies=movies)
 
 # adding a movie or show to the Watch list!
 
 
 @user.route('/add/<string:m_type>/<int:m_id>')
 def add(m_type, m_id):
-  # starting with empty lists
-  user_movies, user_shows = [], []
-  if current_user.is_authenticated:
+   # starting with empty lists
+   user_movies, user_shows = [], []
+   if current_user.is_authenticated:
       user_movies, user_shows = watch_list(current_user.id)
       user = User.query.filter_by(id=current_user.id).first()
       # if the movie is not in the list this adds it and updates the DB
-      if m_type == 'movie':
+   if m_type == 'movie':
           if m_id not in user_movies:
               mv = WatchList(movie=m_id, user_id=user.id)
               db.session.add(mv)
               db.session.commit()
-      else:
+   else:
           # does the same as movies but for the Shows
-          if m_id not in user_shows:
-              mv = WatchList(show=m_id, user_id=user.id)
-              db.session.add(mv)
-              db.session.commit()
+     if m_id not in user_shows:
+        mv = WatchList(show=m_id, user_id=user.id)
+        db.session.add(mv)
+        db.session.commit()
     # Refreshes the page
-  return redirect(request.referrer)
+   return redirect(request.referrer)
 
 # Delete Item from Watch List - Clears all the user movies/shows
 
