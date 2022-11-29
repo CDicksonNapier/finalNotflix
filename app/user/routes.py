@@ -65,8 +65,6 @@ def signin():
     return render_template('public/login.html', form=form)
 
 # Logout Function - Logs the user out and redirects to the login form
-
-
 @user.route('/logout')
 def logout():
     logout_user()
@@ -89,7 +87,6 @@ def account():
             movie_url = f"https://api.themoviedb.org/3/movie/{item.movie}?api_key={creds.API_KEY}&language=en-GB"
             movie = requests.get(movie_url).json()
             movies.append(movie)
-
     return render_template('public/account.html', title='Account',shows=shows, movies=movies)
 
 # adding a movie or show to the Watch list!
