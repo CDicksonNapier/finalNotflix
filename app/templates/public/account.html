@@ -18,8 +18,10 @@
   <div class="row">
     {% for result in movies %}
     <div class="card" style="width: 18rem;">
+      <a href="{{ url_for('movie.current_movie', movie_id=result['id']) }}">
       <img class="card-img-top" src="https://image.tmdb.org/t/p/original/{{ result['backdrop_path'] }}"
         alt="{{result['title']}}">
+      </a>
       <div class="card-body">
         <p class="card-title">{{result['title']}}</p>
                
@@ -32,8 +34,10 @@
   <div class="row">
     {% for show in shows %}
     <div class="card" style="width: 18rem;">
+      <a href="{{ url_for('show.current_show', show_id=result['id']) }}">
       <img class="card-img-top" src="https://image.tmdb.org/t/p/original/{{ show['backdrop_path'] }}"
         alt="{{show['name']}}">
+      </a>
       <div class="card-body">
         <p class="card-title">{{show['name']}}</p>      
       </div>
