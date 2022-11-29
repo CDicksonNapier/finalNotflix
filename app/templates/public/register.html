@@ -4,13 +4,8 @@
 {% block title %} {{title}} {% endblock %}
 <!-- start of the main block -->
 {% block main %}
-<!-- Flash Message Templates! -->
-<div class="container w-25">
-  {% with messages=get_flashed_messages(with_categories=true) %} {% if messages
-  %} {% for category, message in messages %}
-  <div class="alert alert-{{ category }}" id="alerts">{{ message }}</div>
-  {% endfor %} {% endif %} {% endwith %}
-</div>
+
+
 <!-- Start of the Registration Form  -->
 <div class="container-form">
   <a href="/">

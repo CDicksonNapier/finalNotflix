@@ -5,14 +5,7 @@
 
 {% block main %}
 
-<!-- Flash message block  -->
-<div class="container w-25">
-  {% with messages=get_flashed_messages(with_categories=true) %} {% if messages
-  %} {% for category, message in messages %}
-  <div class="alert alert-{{ category }}" id="alerts">{{ message }}</div>
-  {% endfor %} {% endif %} {% endwith %}
-</div>
-<!-- Start of the Form Using WTForms  -->
+
 <div class="container-form-signin">
   <a href="/">
     <div class="regLogo"></div>
