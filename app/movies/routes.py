@@ -23,4 +23,4 @@ def current_movie(movie_id):
         return redirect(url_for('user.signin'))
     else:
         movies_Url = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={creds.API_KEY}&language=en-US&append-to-response=videos").json() 
-    return render_template("public/currentMovie.html", movie=movies_Url)
+    return render_template("public/currentMovie.html",title=movies_Url['title'], movie=movies_Url)
