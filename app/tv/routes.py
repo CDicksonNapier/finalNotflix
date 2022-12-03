@@ -18,7 +18,7 @@ def shows():
     scifi = requests.get(
         f"{creds.TV_URL}&with_genres=10765&language=en-GB").json()
 
-    return render_template('public/tvShows.html', latest=latest, comedy=comedy, adventure=adventure, drama=drama, scifi=scifi)
+    return render_template('public/tvShows.html',title='Tv Shows', latest=latest, comedy=comedy, adventure=adventure, drama=drama, scifi=scifi)
 
 # If the user wants to view an item this will open it 
 @tv.route("/tv/<int:tv_id>")
